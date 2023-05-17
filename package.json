@@ -1,0 +1,35 @@
+{
+    "name": "infojobs-hackaton",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint .",
+        "format": "prettier --write .",
+        "dev": "npm run lint && npm run format && nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ericrisco/infojobs-hackaton.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ericrisco/infojobs-hackaton/issues"
+    },
+    "homepage": "https://github.com/ericrisco/infojobs-hackaton#readme",
+    "dependencies": {
+        "axios": "1.4.0",
+        "dotenv": "16.0.3",
+        "express": "4.18.2",
+        "mongoose": "^7.1.1",
+        "node-telegram-bot-api": "0.61.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.40.0",
+        "eslint-config-prettier": "^8.8.0",
+        "nodemon": "^2.0.22",
+        "prettier": "^2.8.8"
+    }
+}
