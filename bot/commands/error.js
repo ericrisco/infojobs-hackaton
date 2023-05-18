@@ -1,5 +1,6 @@
-module.exports = (bot) => {
-    bot.on('polling_error', (error) => {
-        console.log(error);
-    });
+const bot = require('../bot');
+module.exports = () => {
+	bot.on('polling_error', (error) => {
+		console.log(error);
+	});
 };
