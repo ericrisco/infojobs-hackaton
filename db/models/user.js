@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema({
 	others: String,
 	other_city: Boolean,
 	others_city: [String],
+	score: Number,
 	recomendation: String,
 	registeredAt: {
 		type: Date,

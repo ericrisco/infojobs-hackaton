@@ -22,24 +22,28 @@ const INITIAL_MESSAGES = [
         "others": "[others]",
         "other_city": [other_city],
         "others_city": ["city1", "city2", "city3"],
+        "score": [score],
         "recomendation": "[recomendation]"
      }
 
-     Tienes que cambiar lo que hay entre corchetes por lo que consigas resumir de la descripción. Si no consigues resumir nada, pon un valor null. Crea una recomendación de como deberia mejorar su descripción de un máximo de 100 palabras
-    
+     Tienes que cambiar lo que hay entre corchetes por lo que consigas resumir de la descripción. Si no consigues resumir nada, pon un valor null. 
+     Segun tu criterio si la descripción es correcta pon una valoracion de 0 a 10. Crea una recomendación de como deberia mejorar su descripción de un máximo de 100 palabras teniendo en cuenta el score
+     others_city es un array de ciudades que el usuario ha mencionado en su descripción. En caso de que no haya mencionado ninguna ciudad, pon un array vacio.
+
      Este seria un ejemplo de resultado:
      
      {
-         "age": 32,
-         "city": "Madrid",
-         "category": null,
-         "position": null,
-         "experienceYears": 8,
-         "remote": yes,
-         "others": "lider, gestion de proyectos, mobile"
-         "other_city": true,
-         "others_city": ["Barcelona", "Valencia"],
-         "recomendation": "Deberías mejorar tu descripción, es importante que me explicas a que te dedicas o a que te quieres dedicar."
+        "age": 32,
+        "city": "Madrid",
+        "category": null,
+        "position": null,
+        "experienceYears": 8,
+        "remote": yes,
+        "others": "lider, gestion de proyectos, mobile"
+        "other_city": true,
+        "others_city": ["Barcelona", "Valencia"],
+        "score": 7,
+        "recomendation": "Deberías mejorar tu descripción, es importante que me explicas a que te dedicas o a que te quieres dedicar."
      }
      `
 	}
@@ -64,7 +68,7 @@ async function getAboutMeSummarized(chatId, text) {
 	try {
 		json = JSON.parse(data);
 		await User.findOneAndUpdate({ chatId }, { ...json });
-        return json;
+		return json;
 	} catch (err) {
 		console.error(err);
 	}
