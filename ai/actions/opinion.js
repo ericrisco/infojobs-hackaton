@@ -1,7 +1,10 @@
 const { ChatCompletionRequestMessageRoleEnum } = require('openai');
 
 const ai = require('../openai');
-const aiModel = process.env.AI_MODEL ?? '';
+const sendMarkdownMessage = require('../../bot/sendMarkdown');
+const AI_MODEL = process.env.AI_MODEL ?? '';
+const OPEN_AI_RATE_LIMIT_RETRIES = process.env.OPEN_AI_RATE_LIMIT_RETRIES ?? 5;
+const messages = require('../../language/messages.json');
 
 const INITIAL_MESSAGES = [
 	{
@@ -18,10 +21,10 @@ const INITIAL_MESSAGES = [
 	}
 ];
 
-async function getOpinion(user, offer) {
+async function getOpinion(user, offer, attempts = OPEN_AI_RATE_LIMIT_RETRIES) {
 	try {
 		const completion = await ai.createChatCompletion({
-			model: aiModel,
+			model: AI_MODEL,
 			temperature: 0,
 			messages: [
 				...INITIAL_MESSAGES,
@@ -35,8 +38,12 @@ async function getOpinion(user, offer) {
 		const data = completion.data.choices[0].message?.content ?? '';
 		return data;
 	} catch (err) {
-		console.log(err);
-		return 'Tengo el cerebro un poco saturado...';
+		if (err.response.status === 429 && attempts > 0) {
+			sendMarkdownMessage(user.chatId, messages.giveMeTime);
+			await new Promise((resolve) => setTimeout(resolve, 20000));
+			return getOpinion(user, offer, attempts - 1);
+		}
+		return messages.aiError;
 	}
 }
 

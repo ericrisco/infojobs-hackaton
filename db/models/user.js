@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema({
 	category: String,
 	position: String,
 	experienceYears: Number,
+	teleworking: String,
 	remote: Boolean,
 	keywords: String,
 	other_city: Boolean,

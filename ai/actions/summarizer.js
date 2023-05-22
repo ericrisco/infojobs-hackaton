@@ -1,7 +1,10 @@
 const { ChatCompletionRequestMessageRoleEnum } = require('openai');
 
 const ai = require('../openai');
-const aiModel = process.env.AI_MODEL ?? '';
+const sendMarkdownMessage = require('../../bot/sendMarkdown');
+const AI_MODEL = process.env.AI_MODEL ?? '';
+const OPEN_AI_RATE_LIMIT_RETRIES = process.env.OPEN_AI_RATE_LIMIT_RETRIES ?? 5;
+const messages = require('../../language/messages.json');
 
 const INITIAL_MESSAGES = [
 	{
@@ -17,6 +20,7 @@ const INITIAL_MESSAGES = [
         "position": "[position]",
         "experienceYears": [experienceYears],
         "remote": [remote],
+        "teleworking": "[teleworking]",
         "keywords": "[keywords]",
         "other_city": [other_city],
         "others_city": ["city1", "city2", "city3"],
@@ -33,10 +37,18 @@ const INITIAL_MESSAGES = [
 
      remote es un valor booleano que representa si el usuario quiere trabajar en remoto. Si no lo menciona pon un valor null.
 
+     teleworking es un valor string que representa si el usuario quiere poder teletrabajar o no. Si no lo menciona pon un valor 'no-se-sabe-no-esta-decidido'.
+     los posibles valores son: trabajo-solo-presencial, solo-teletrabajo, teletrabajo-posible, no-se-sabe-no-esta-decidido
+     Según tu criterio con el texto que te pase el usuario escoge uno de estos valores.
+
      Tienes que cambiar lo que hay entre corchetes por lo que consigas resumir de la descripción. Si no consigues resumir nada, pon un valor null. 
      
-     El campo keywords quiero que resumas la descripción y se lo mas preciso y concreto y no añadas poblaciones. La lista que sea de maximo 4 palabras clave. Sin articulos "de", "el", "la" ni espacios, para separar las palabras pon un asterisco (*). Ejemplo: lider*gestion*proyectos*mobile
-     
+     Para el campo "keywords" dame una lista las 4 palabras clave mas importantes que resalten solo mis habilidades relacionadas con un trabajo quitando cualquier otra información y articulos como 'el', 'la', 'de' y todos los demás.      Este seria un ejemplo de descripción:
+      """Me llamo Julio, tengo 26 años, 3 años de experiencia programando en React y javascript y busco trabajo en Madrid, pero tambien me interesa Valencia y Barcelona."""
+      Y la lista resultante seria:
+      """React, javascript"""
+      El resultado es una lista de palabras separadas por comas y sin espacios entre ellas. Sino consigues nada, pon null
+
      Segun tu criterio si la descripción es correcta pon una valoracion de 0 a 10. Crea una recomendación de como deberia mejorar su descripción de un máximo de 100 palabras teniendo en cuenta el score
      others_city es un array de ciudades que el usuario ha mencionado en su descripción. En caso de que no haya mencionado ninguna ciudad, pon un array vacio.
 
@@ -49,6 +61,7 @@ const INITIAL_MESSAGES = [
         "position": null,
         "experienceYears": 8,
         "remote": yes,
+        "teleworking": "no-se-sabe-no-esta-decidido",
         "keywords": "lider, gestion de proyectos, mobile"
         "other_city": true,
         "others_city": ["Barcelona", "Valencia"],
@@ -59,10 +72,10 @@ const INITIAL_MESSAGES = [
 	}
 ];
 
-async function getAboutMeSummarized(text) {
+async function getAboutMeSummarized(chatId, text, attempts = OPEN_AI_RATE_LIMIT_RETRIES) {
 	try {
 		const completion = await ai.createChatCompletion({
-			model: aiModel,
+			model: AI_MODEL,
 			temperature: 0,
 			messages: [
 				...INITIAL_MESSAGES,
@@ -80,10 +93,15 @@ async function getAboutMeSummarized(text) {
 			json = JSON.parse(data);
 			return json;
 		} catch (err) {
-         return { error: true, message: 'Tengo el cerebro un poco frito ahora mismo, puedes intentar un poco más tarde?' };
+			return { error: true, message: messages.aiError };
 		}
 	} catch (err) {
-      return { error: true, message: 'Tengo el cerebro un poco frito ahora mismo, puedes intentar un poco más tarde?' };
+		if (err.response.status === 429 && attempts > 0) {
+			sendMarkdownMessage(chatId, messages.giveMeTime);
+			await new Promise((resolve) => setTimeout(resolve, 20000));
+			return getAboutMeSummarized(chatId, text, attempts - 1);
+		}
+		return { action: 'error', message: messages.aiError };
 	}
 }
 

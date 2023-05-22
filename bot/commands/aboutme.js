@@ -1,4 +1,3 @@
-const bot = require('../bot');
 const sendMarkdownMessage = require('../sendMarkdown');
 const messages = require('../../language/messages.json');
 const util = require('util');
@@ -7,15 +6,14 @@ const User = require('../../db/models/user');
 const getAboutMeSummarized = require('../../ai/actions/summarizer');
 
 async function aboutMe(chatId, text) {
-
 	if (text) {
 		try {
 			await User.findOneAndUpdate({ chatId }, { aboutMe: text });
 
-			const summary = await getAboutMeSummarized(text);
+			const summary = await getAboutMeSummarized(chatId, text);
 
 			if (summary.error) {
-				await sendMarkdownMessage(bot, chatId, summary.message);
+				await sendMarkdownMessage(chatId, summary.message);
 			} else {
 				const summaryMessage = util.format(
 					messages.userProfileSummary,
@@ -30,21 +28,23 @@ async function aboutMe(chatId, text) {
 					summary.recomendation
 				);
 
-				await sendMarkdownMessage(bot, chatId, summaryMessage);
+				await sendMarkdownMessage(chatId, summaryMessage);
 
 				const score = summary.score;
-				const availableForJobSearch = score >= 8;
+				const availableForJobSearch = score >= 7;
 
 				const profileStatusmessage = availableForJobSearch ? messages.completeProfileMessage : messages.incompleteProfileMessage;
 
-				await sendMarkdownMessage(bot, chatId, profileStatusmessage);
+				await sendMarkdownMessage(chatId, profileStatusmessage);
+				if (!availableForJobSearch) await sendMarkdownMessage(chatId, messages.exampleProfile);
 
-                summary.score = score;
-                summary.availableForJobSearch = availableForJobSearch;
+				summary.score = score;
+				summary.availableForJobSearch = availableForJobSearch;
+
 				await User.findOneAndUpdate({ chatId }, { ...summary });
 			}
 		} catch (err) {
-			errorHandling(bot, chatId, err);
+			errorHandling(chatId, err);
 		}
 	}
 }

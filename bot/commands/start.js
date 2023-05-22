@@ -14,11 +14,11 @@ module.exports = () => {
 			let user = await User.findOne({ chatId });
 			if (user) {
 				const welcomeBackMessage = user.firstName === '' ? messages.welcomeBackNoName : util.format(messages.welcomeBack, user.firstName);
-				await sendMarkdownMessage(bot, chatId, welcomeBackMessage);
+				await sendMarkdownMessage(chatId, welcomeBackMessage);
 
 				if (!user.availableForJobSearch) {
-					await sendMarkdownMessage(bot, chatId, messages.giveMeInfo);
-					await sendMarkdownMessage(bot, chatId, messages.goDescription);
+					await sendMarkdownMessage(chatId, messages.giveMeInfo);
+					await sendMarkdownMessage(chatId, messages.goDescription);
 				}
 			} else {
 				let newUser = new User({
@@ -28,10 +28,10 @@ module.exports = () => {
 				});
 				await newUser.save();
 
-				await sendMarkdownMessage(bot, chatId, messages.welcomeNew);
+				await sendMarkdownMessage(chatId, messages.help);
 			}
 		} catch (err) {
-			errorHandling(bot, chatId, err);
+			errorHandling(chatId, err);
 		}
 	});
 };
