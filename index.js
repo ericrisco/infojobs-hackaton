@@ -7,8 +7,7 @@ const port = process.env.PORT || 3000;
 const connectDB = require('./db/db');
 
 const startCommand = require('./bot/commands/start');
-const jobsCommand = require('./bot/commands/jobs');
-const helpCommand = require('./bot/commands/help');
+const onMessage = require('./bot/onMessage');
 const errorCommand = require('./bot/commands/error');
 
 app.get('/ping', (req, res) => {
@@ -16,8 +15,7 @@ app.get('/ping', (req, res) => {
 });
 
 startCommand();
-helpCommand();
-jobsCommand();
+onMessage();
 errorCommand();
 
 app.listen(port, async () => {

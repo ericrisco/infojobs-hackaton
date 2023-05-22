@@ -15,11 +15,19 @@ const UserSchema = new mongoose.Schema({
 	position: String,
 	experienceYears: Number,
 	remote: Boolean,
-	others: String,
+	keywords: String,
 	other_city: Boolean,
 	others_city: [String],
 	score: Number,
 	recomendation: String,
+	availableForJobSearch: {
+		type: Boolean,
+		default: false
+	},
+	canSendDailyJobOffers: {
+		type: Boolean,
+		default: true
+	},
 	registeredAt: {
 		type: Date,
 		default: Date.now
