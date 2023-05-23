@@ -29,6 +29,7 @@ module.exports = () => {
 				await newUser.save();
 
 				await sendMarkdownMessage(chatId, messages.help);
+				await sendMarkdownMessage(chatId, messages.exampleProfile);
 			}
 		} catch (err) {
 			errorHandling(chatId, err);
