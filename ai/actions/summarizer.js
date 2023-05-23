@@ -4,6 +4,7 @@ const ai = require('../openai');
 const sendMarkdownMessage = require('../../bot/sendMarkdown');
 const AI_MODEL = process.env.AI_MODEL ?? '';
 const OPEN_AI_RATE_LIMIT_RETRIES = process.env.OPEN_AI_RATE_LIMIT_RETRIES ?? 5;
+const OPEN_AI_DELAY_BETWEEN_RETRIES = process.env.OPEN_AI_DELAY_BETWEEN_RETRIES ?? 20000;
 const messages = require('../../language/messages.json');
 
 const INITIAL_MESSAGES = [
@@ -22,8 +23,8 @@ const INITIAL_MESSAGES = [
         "remote": [remote],
         "teleworking": "[teleworking]",
         "keywords": "[keywords]",
-        "other_city": [other_city],
-        "others_city": ["city1", "city2", "city3"],
+        "willingToRelocate": [willingToRelocate],
+        "relocationCities": ["city1", "city2", "city3"],
         "score": [score],
         "recomendation": "[recomendation]"
      }
@@ -50,7 +51,7 @@ const INITIAL_MESSAGES = [
       El resultado es una lista de palabras separadas por comas y sin espacios entre ellas. Sino consigues nada, pon null
 
      Segun tu criterio si la descripción es correcta pon una valoracion de 0 a 10. Crea una recomendación de como deberia mejorar su descripción de un máximo de 100 palabras teniendo en cuenta el score
-     others_city es un array de ciudades que el usuario ha mencionado en su descripción. En caso de que no haya mencionado ninguna ciudad, pon un array vacio.
+     relocationCities es un array de ciudades que el usuario ha mencionado en su descripción. En caso de que no haya mencionado ninguna ciudad, pon un array vacio.
 
      Este seria un ejemplo de resultado:
      
@@ -63,8 +64,8 @@ const INITIAL_MESSAGES = [
         "remote": yes,
         "teleworking": "no-se-sabe-no-esta-decidido",
         "keywords": "lider, gestion de proyectos, mobile"
-        "other_city": true,
-        "others_city": ["Barcelona", "Valencia"],
+        "willingToRelocate": true,
+        "relocationCities": ["Barcelona", "Valencia"],
         "score": 7,
         "recomendation": "Deberías mejorar tu descripción, es importante que me explicas a que te dedicas o a que te quieres dedicar."
      }
@@ -98,7 +99,7 @@ async function getAboutMeSummarized(chatId, text, attempts = OPEN_AI_RATE_LIMIT_
 	} catch (err) {
 		if (err.response.status === 429 && attempts > 0) {
 			sendMarkdownMessage(chatId, messages.giveMeTime);
-			await new Promise((resolve) => setTimeout(resolve, 20000));
+			await new Promise((resolve) => setTimeout(resolve, OPEN_AI_DELAY_BETWEEN_RETRIES));
 			return getAboutMeSummarized(chatId, text, attempts - 1);
 		}
 		return { action: 'error', message: messages.aiError };

@@ -1,23 +1,23 @@
 name: Deploy PD Infojobs Hackaton
 
 on:
-  push:
-    branches: [ main ]
+    push:
+        branches: [main]
 
 jobs:
-  Deploy:
-    runs-on: ubuntu-latest
-    
-    steps:   
-      - name: ENTRECOT DEPLOY
-        uses: D3rHase/ssh-command-action@v0.2.2
-        with:
-          host: ${{secrets.HOST}} 
-          user: ${{secrets.USERNAME}} 
-          private_key: ${{secrets.KEY}} 
-          command: |
-            cd infojobs-hackaton &&
-            git pull origin main &&
-            npm prune &&
-            npm install &&
-            pm2 restart infojobs-hackaton
+    Deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: ENTRECOT DEPLOY
+              uses: D3rHase/ssh-command-action@v0.2.2
+              with:
+                  host: ${{secrets.HOST}}
+                  user: ${{secrets.USERNAME}}
+                  private_key: ${{secrets.KEY}}
+                  command: |
+                      cd infojobs-hackaton &&
+                      git pull origin main &&
+                      npm prune &&
+                      npm install &&
+                      pm2 restart infojobs-hackaton

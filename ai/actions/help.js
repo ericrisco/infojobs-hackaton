@@ -4,6 +4,7 @@ const ai = require('../openai');
 const sendMarkdownMessage = require('../../bot/sendMarkdown');
 const AI_MODEL = process.env.AI_MODEL ?? '';
 const OPEN_AI_RATE_LIMIT_RETRIES = process.env.OPEN_AI_RATE_LIMIT_RETRIES ?? 5;
+const OPEN_AI_DELAY_BETWEEN_RETRIES = process.env.OPEN_AI_DELAY_BETWEEN_RETRIES ?? 20000;
 const messages = require('../../language/messages.json');
 
 const INITIAL_MESSAGES = [
@@ -12,7 +13,7 @@ const INITIAL_MESSAGES = [
 		content: `Imagina que eres un chatbot que ayuda a las personas a encontrar trabajo. Entre tus funciones estan:
 
         """
-        ¡Hola, hola! Soy tu IA personal de búsqueda de empleo de InfoJobs, aquí para llevar tu carrera al siguiente nivel.
+        Soy tu IA personal de búsqueda de empleo de InfoJobs, aquí para llevar tu carrera al siguiente nivel.
         Usando la extensa base de datos de InfoJobs, descubriremos juntos las oportunidades laborales que mejor se ajusten a tus habilidades e intereses. 
         Primero, necesito conocer más sobre ti. Por eso, me encantaría que me contaras un poco sobre tu perfil laboral. 
         Recuerda, cuanto más precisa sea la información que me proporciones, más afiladas serán las ofertas que podré seleccionar para ti.
@@ -49,7 +50,7 @@ async function getHelp(chatId, message, attempts = OPEN_AI_RATE_LIMIT_RETRIES) {
 	} catch (err) {
 		if (err.response.status === 429 && attempts > 0) {
 			sendMarkdownMessage(chatId, messages.giveMeTime);
-			await new Promise((resolve) => setTimeout(resolve, 20000));
+			await new Promise((resolve) => setTimeout(resolve, OPEN_AI_DELAY_BETWEEN_RETRIES));
 			return getHelp(chatId, message, attempts - 1);
 		}
 		return messages.aiError;

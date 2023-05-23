@@ -17,8 +17,9 @@ const UserSchema = new mongoose.Schema({
 	teleworking: String,
 	remote: Boolean,
 	keywords: String,
-	other_city: Boolean,
-	others_city: [String],
+	willingToRelocate: Boolean,
+	relocationCities: [String],
+	sentJobOffersIds: [String],
 	score: Number,
 	recomendation: String,
 	availableForJobSearch: {

@@ -4,6 +4,7 @@ const ai = require('../openai');
 const sendMarkdownMessage = require('../../bot/sendMarkdown');
 const AI_MODEL = process.env.AI_MODEL ?? '';
 const OPEN_AI_RATE_LIMIT_RETRIES = process.env.OPEN_AI_RATE_LIMIT_RETRIES ?? 5;
+const OPEN_AI_DELAY_BETWEEN_RETRIES = process.env.OPEN_AI_DELAY_BETWEEN_RETRIES ?? 20000;
 const messages = require('../../language/messages.json');
 
 const INITIAL_MESSAGES = [
@@ -73,7 +74,7 @@ async function getNextAction(chatId, message, attempts = OPEN_AI_RATE_LIMIT_RETR
 	} catch (err) {
 		if (err.response.status === 429 && attempts > 0) {
 			sendMarkdownMessage(chatId, messages.giveMeTime);
-			await new Promise((resolve) => setTimeout(resolve, 20000));
+			await new Promise((resolve) => setTimeout(resolve, OPEN_AI_DELAY_BETWEEN_RETRIES));
 			return getNextAction(chatId, message, attempts - 1);
 		}
 		return { action: 'error', message: messages.aiError };

@@ -17,7 +17,10 @@ module.exports = () => {
 
 		const chatId = msg.chat.id;
 		const user = await User.findOne({ chatId });
-		if (!user) return;
+		if (!user) {
+			await sendMarkdownMessage(chatId, messages.profileNotFound);
+			return;
+		} 
 
 		const nextAction = await getNextAction(chatId, msg.text);
 
@@ -44,6 +47,7 @@ module.exports = () => {
 			case 'help':
 				var response = await getHelp(chatId, msg.text);
 				await sendMarkdownMessage(chatId, response);
+				await sendMarkdownMessage(chatId, messages.helpSimple);
 				break;
 			case 'joke':
 				var joke = await getJoke(chatId);

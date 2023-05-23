@@ -22,8 +22,8 @@ async function getProfile(chatId) {
 					user.experienceYears || 'N/A',
 					user.remote ? 'Sí' : 'No',
 					user.keywords || 'N/A',
-					user.other_city ? 'Sí' : 'No',
-					user.others_city ? user.others_city.join(', ') : 'N/A',
+					user.willingToRelocate ? 'Sí' : 'No',
+					user.relocationCities ? user.relocationCities.join(', ') : 'N/A',
 					user.recomendation
 				);
 
@@ -43,23 +43,22 @@ async function getProfile(chatId) {
 	}
 }
 
-async function deleteProfile(chatId){
+async function deleteProfile(chatId) {
 	try {
 		const user = await User.findOne({ chatId });
 
 		if (!user) {
 			await sendMarkdownMessage(chatId, messages.profileNotFound);
 		} else {
-            await User.deleteOne({ chatId });
+			await User.deleteOne({ chatId });
 			await sendMarkdownMessage(chatId, messages.profileDeleted);
 		}
-
 	} catch (err) {
 		errorHandling(chatId, err);
 	}
 }
 
-module.exports = { 
-    getProfile,
-    deleteProfile
-}
+module.exports = {
+	getProfile,
+	deleteProfile
+};

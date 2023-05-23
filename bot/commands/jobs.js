@@ -8,7 +8,7 @@ const errorHandling = require('../errorHandling');
 const { getLastOffersByUser, getOfferById } = require('../../infojobs/offers');
 const getOpinion = require('../../ai/actions/opinion');
 
-async function printJobs(chatId, offers) {
+async function printJobs(chatId, offers, cron = false) {
 	try {
 		const currentResults = offers.currentResults;
 		const totalResults = offers.totalResults;
@@ -17,8 +17,10 @@ async function printJobs(chatId, offers) {
 			await sendMarkdownMessage(chatId, messages.noJobsFound);
 		} else {
 			const user = await User.findOne({ chatId });
-			await sendMarkdownMessage(chatId, util.format(messages.jobsFound, totalResults, currentResults));
-			await sendMarkdownMessage(chatId, messages.analaizingJobs);
+			if(!cron) {
+				await sendMarkdownMessage(chatId, util.format(messages.jobsFound, totalResults, currentResults));
+				await sendMarkdownMessage(chatId, messages.analaizingJobs);
+			}
 
 			for (let i = 0; i < offers.items.length; i++) {
 				const offer = offers.items[i];

@@ -1,8 +1,8 @@
+const User = require('../../db/models/user');
 const sendMarkdownMessage = require('../sendMarkdown');
 const messages = require('../../language/messages.json');
 const util = require('util');
 const errorHandling = require('../errorHandling');
-const User = require('../../db/models/user');
 const getAboutMeSummarized = require('../../ai/actions/summarizer');
 
 async function aboutMe(chatId, text) {
@@ -23,8 +23,8 @@ async function aboutMe(chatId, text) {
 					summary.experienceYears || 'N/A',
 					summary.remote ? 'Sí' : 'No',
 					summary.keywords || 'N/A',
-					summary.other_city ? 'Sí' : 'No',
-					summary.others_city ? summary.others_city.join(', ') : 'N/A',
+					summary.willingToRelocate ? 'Sí' : 'No',
+					summary.relocationCities ? summary.relocationCities.join(', ') : 'N/A',
 					summary.recomendation
 				);
 
