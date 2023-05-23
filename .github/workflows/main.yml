@@ -20,4 +20,4 @@ jobs:
             git pull origin main &&
             npm prune &&
             npm install &&
-            pm2 restart infojobs_hackaton
+            pm2 restart infojobs-hackaton
