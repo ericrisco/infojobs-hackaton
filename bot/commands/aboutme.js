@@ -22,7 +22,7 @@ async function aboutMe(chatId, text) {
 					summary.position || 'N/A',
 					summary.experienceYears || 'N/A',
 					summary.remote ? 'Sí' : 'No',
-					summary.others || 'N/A',
+					summary.keywords || 'N/A',
 					summary.other_city ? 'Sí' : 'No',
 					summary.others_city ? summary.others_city.join(', ') : 'N/A',
 					summary.recomendation

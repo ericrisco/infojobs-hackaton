@@ -10,7 +10,7 @@ const startCommand = require('./bot/commands/start');
 const onMessage = require('./bot/onMessage');
 const errorCommand = require('./bot/commands/error');
 
-app.get('/ping', (req, res) => {
+app.get('/infojobs/ping', (req, res) => {
 	res.json({ success: true });
 });
 

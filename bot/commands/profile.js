@@ -21,7 +21,7 @@ async function getProfile(chatId) {
 					user.position || 'N/A',
 					user.experienceYears || 'N/A',
 					user.remote ? 'Sí' : 'No',
-					user.others || 'N/A',
+					user.keywords || 'N/A',
 					user.other_city ? 'Sí' : 'No',
 					user.others_city ? user.others_city.join(', ') : 'N/A',
 					user.recomendation
@@ -53,7 +53,7 @@ async function deleteProfile(chatId){
             await User.deleteOne({ chatId });
 			await sendMarkdownMessage(chatId, messages.profileDeleted);
 		}
-        
+
 	} catch (err) {
 		errorHandling(chatId, err);
 	}
