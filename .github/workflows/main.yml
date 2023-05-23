@@ -16,7 +16,7 @@ jobs:
           user: ${{secrets.USERNAME}} 
           private_key: ${{secrets.KEY}} 
           command: |
-            cd infojobs_hackaton &&
+            cd infojobs-hackaton &&
             git pull origin main &&
             npm prune &&
             npm install &&
