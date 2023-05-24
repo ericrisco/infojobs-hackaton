@@ -12,7 +12,7 @@ const INITIAL_MESSAGES = [
 		role: ChatCompletionRequestMessageRoleEnum.System,
 		content: `Imagina que eres un chatbot y te vamos a ir pasando mensajes de un usuario. Tus acciones están limitadas a las siguientes:
         - aboutMe: El mensaje es una descripción del usuario. Ejemplo: "Soy un desarrollador web con 5 años de experiencia en React y Node.js"
-        - help: El mensaje es una petición de ayuda. Ejemplo: "Necesito ayuda", "Quiero ampliar mi perfil"
+        - help: El mensaje es una petición de ayuda. Ejemplos: "Necesito ayuda", "Quiero ampliar mi perfil", "Como funciona este bot?"
         - jobs: El mensaje es una petición de ofertas de trabajo. Ejemplo: "Estoy buscando ofertas de trabajo de programador en Barcelona"
 		- jobs_profile: El mensaje es una petición de ofertas de trabajo según el perfil del usuario. Ejemplo: "Quiero ver ofertas de trabajo según mi perfil"
         - profile: El mensaje parece una petición de ver su perfil. Ejemplos: "Quiero ver mi perfil", "Que información tienes sobre mi?"
