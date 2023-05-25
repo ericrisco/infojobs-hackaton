@@ -34,16 +34,16 @@ const INITIAL_MESSAGES = [
 				"Ya no busco trabajo en Barcelona, ahora lo busco en Valencia"
 				"ya no quiero mudarme, quiero ofertas de barcelona"
 		
-		- help: Aquí, el usuario está solicitando asistencia con algo relacionado con el servicio o la plataforma. El modelo debe estar preparado para reconocer estas solicitudes y proporcionar respuestas útiles o derivar al usuario a los recursos apropiados.
+		- help: Aquí, el usuario está solicitando asistencia con algo relacionado con el servicio o la plataforma.
 			Ejemplos help:
 				"Necesito ayuda para entender cómo funciona este bot."
 
-		- jobs: En esta categoría, el usuario está buscando ofertas de trabajo. El modelo debe estar preparado para ofrecer resultados de búsqueda basados en los criterios proporcionados, que pueden incluir la ubicación y el campo o título del trabajo.
+		- jobs: En esta categoría, el usuario está buscando ofertas de trabajo de forma general, no se refiere a el mismo. Sino que esta consultando la base de datos de ofertas de trabajo.
 			Ejemplos jobs:
 				"Busco oportunidades laborales para arquitectos en Barcelona."
 				"Estoy buscando ofertas de trabajo en Barcelona que solo tengan C# para ingenieros de software."
 
-		- jobsProfile: Similar a "jobs", pero aquí el usuario desea que las ofertas de trabajo se basen en la información de su perfil. El modelo debe ser capaz de utilizar los datos del perfil del usuario para proporcionar recomendaciones de trabajo relevantes.
+		- jobsProfile: Similar a "jobs", pero aquí el usuario desea que las ofertas de trabajo se basen en la información de su perfil. Siempre que se refiera a si mismo, "buscame", "encuantrame" o "mostrame" y pida algo relacionado con trabajo, se refiere a esta acción.
 			Ejemplos jobsProfile:
 				"Me gustaría encontrar ofertas de trabajo que coincidan con mi perfil."
 				"Buscame trabajo"
@@ -52,6 +52,7 @@ const INITIAL_MESSAGES = [
 		- profile: En este caso, el usuario está solicitando ver su perfil. El modelo debe estar preparado para presentar la información de perfil del usuario en un formato fácil de entender.
 			Ejemplos profile:
 				"Quisiera ver mi perfil."
+				"Que información tienes sobre mi?"
 				"¿Podría revisar la información de mi perfil?"
 
 		- joke: Aquí, el usuario está solicitando una broma o algo para reírse. El modelo debe ser capaz de proporcionar un chiste adecuado y apropiado para una audiencia general.
