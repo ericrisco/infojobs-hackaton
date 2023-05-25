@@ -17,7 +17,7 @@ startCommand();
 onMessage();
 errorCommand();
 
-cron.schedule('0 9 * * *', function() {
+cron.schedule('0 9 * * *', function () {
 	console.log('Running cron job');
 	dailyOffer();
 });

@@ -22,7 +22,7 @@ module.exports = () => {
 			return;
 		}
 
-		if(user.executing){
+		if (user.executing) {
 			await sendMarkdownMessage(chatId, messages.executing);
 			return;
 		}
@@ -72,7 +72,7 @@ module.exports = () => {
 				await sendMarkdownMessage(chatId, nextAction.message ?? messages.aiError);
 				break;
 		}
-		
+
 		await User.findOneAndUpdate({ chatId }, { executing: false });
 
 		return;

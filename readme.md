@@ -19,49 +19,50 @@ You can test the bot on Telegram at the following link: [@infojobsgpt_bot](https
 
 ## 💻 Technologies
 
-- [Node.js](https://nodejs.org/)
-- [OpenAI API](https://platform.openai.com/)
-- [Infojobs API](https://developer.infojobs.net/)
-- [Telegram API](https://core.telegram.org/)
-- [MongoDB](https://www.mongodb.com/)
+    - [Node.js](https://nodejs.org/)
+    - [OpenAI API](https://platform.openai.com/)
+    - [Infojobs API](https://developer.infojobs.net/)
+    - [Telegram API](https://core.telegram.org/)
+    - [MongoDB](https://www.mongodb.com/)
 
 ## 📝 Installation
 
 1. Clone the repository
 
-   ```sh
-   git clone
-   ```
+    ```sh
+    git clone
+    ```
 
 2. Install NPM packages
 
-   ```sh
-    npm install
+    ```sh
+     npm install
     ```
 
-3. Run the server
+3. Create a .env file with the following environment variables:
 
-   ```sh
-    PORT=5000
-    TELEGRAM_TOKEN=xxx
-    INFOJOBS_API_KEY=xxx
-    MONGODB_URI="mongodb+srv://<username>:<password>@xxx/xxx"
-    MONGODB_USERNAME=xxx
-    MONGODB_PASSWORD=xxx
-    OPENAI_TOKEN=xxx
-    AI_MODEL=gpt-3.5-turbo
-    OPEN_AI_RATE_LIMIT_RETRIES=5
-    OPEN_AI_DELAY_BETWEEN_RETRIES=20000
-   ```
+    ```sh
+     PORT=5000
+     TELEGRAM_TOKEN=xxx
+     INFOJOBS_API_KEY=xxx
+     MONGODB_URI="mongodb+srv://<username>:<password>@xxx/xxx"
+     MONGODB_USERNAME=xxx
+     MONGODB_PASSWORD=xxx
+     OPENAI_TOKEN=xxx
+     AI_MODEL=gpt-3.5-turbo
+     OPEN_AI_RATE_LIMIT_RETRIES=5
+     OPEN_AI_DELAY_BETWEEN_RETRIES=20000
+    ```
 
-   You need a Telegram bot token, an Infojobs API key, a MongoDB URI, a MongoDB username, a MongoDB password, an OpenAI API token.
-   - You can get a Telegram bot token by talking to the [BotFather](https://t.me/botfather).
-   - You can get an Infojobs API key by talking to the [Infojobs API team](https://developer.infojobs.net/).
-   - You can get an OpenAI API token by signing up for the [OpenAI API](https://beta.openai.com/).
-   - You can get a MongoDB URI, a MongoDB username, and a MongoDB password by signing up for [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+    You need a Telegram bot token, an Infojobs API key, a MongoDB URI, a MongoDB username, a MongoDB password, an OpenAI API token.
 
-4. Ejecuta el servidor
+    - You can get a Telegram bot token by talking to the [BotFather](https://t.me/botfather).
+    - You can get an Infojobs API key by talking to the [Infojobs API team](https://developer.infojobs.net/).
+    - You can get an OpenAI API token by signing up for the [OpenAI API](https://beta.openai.com/).
+    - You can get a MongoDB URI, a MongoDB username, and a MongoDB password by signing up for [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
-   ```sh
-    npm run dev
+4. Run the dev server
+
+    ```sh
+     npm run dev
     ```
