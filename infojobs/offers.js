@@ -8,7 +8,7 @@ async function getLastOffersByUser(user, maxResults = 3) {
 	url += '&maxResults=' + maxResults;
 	url += '&sinceDate=_7_DAYS';
 	url += user.category !== '' && user.category ? '&category=' + encodeURIComponent(user.category) : '';
-	url += '&country=espana';
+//	url += '&country=espana';
 	url += user.keywords !== '' && user.keywords ? '&q=descripcion:' + encodeURIComponent(formatKeywords(user.keywords)) : '';
 	url += user.city !== '' && user.city ? '&city=' + encodeURIComponent(user.city) : '';
 
@@ -34,7 +34,7 @@ async function getOffersByQuery(query) {
 	url += '&maxResults=3';
 	url += '&sinceDate=_7_DAYS';
 	url += query.category !== '' ? '&category=' + encodeURIComponent(query.category) : '';
-	url += '&country=espana';
+//	url += '&country=espana';
 	url += query.keywords !== '' ? '&q=descripcion:' + encodeURIComponent(formatKeywords(query.keywords)) : '';
 
 	query.cities.forEach((city) => {
