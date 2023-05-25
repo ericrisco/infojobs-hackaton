@@ -2,10 +2,6 @@
 
 InfojobsGPT is an innovative Telegram chatbot that utilizes the OpenAI API and the Infojobs API to assist individuals in their job search. Using the GPT-3 model, it allows for natural language interaction, removing the need for predefined commands. Besides assisting in job searching, InfojobsGPT can generate job profiles for users, formulate queries to the Infojobs API, evaluate job offers, and, of course, tell bad jokes to brighten up your day. Additionally, InfojobsGPT can send you a job offer that matches your profile every day.
 
-## 📝 Try the bot
-
-You can test the bot on Telegram at the following link: <a href="https://t.me/infojobsgpt_bot" target="_blank">@infojobsgpt_bot</a>
-
 ## 💻 Features
 
 1. **Natural Language Interaction**: Interact with the chatbot in natural language, without the need for predefined commands. Works the same as ChatGPT.
@@ -24,6 +20,10 @@ You can test the bot on Telegram at the following link: <a href="https://t.me/in
     - [Infojobs API](https://developer.infojobs.net/)
     - [Telegram API](https://core.telegram.org/)
     - [MongoDB](https://www.mongodb.com/)
+
+## 📝 Try the bot
+
+You can test the bot on Telegram at the following link: [@infojobsgpt_bot](https://t.me/infojobsgpt_bot)
 
 ## 📝 Installation
 
