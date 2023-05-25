@@ -17,7 +17,7 @@ startCommand();
 onMessage();
 errorCommand();
 
-cron.schedule('* 8 * * *', function() {
+cron.schedule('* 8 * * *', function () {
 	console.log('Running cron job');
 	dailyOffer();
 });
@@ -25,7 +25,6 @@ cron.schedule('* 8 * * *', function() {
 app.get('/infojobs/ping', (req, res) => {
 	res.json({ success: true });
 });
-
 
 app.listen(port, async () => {
 	await connectDB();

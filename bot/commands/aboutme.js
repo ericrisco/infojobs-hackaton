@@ -5,12 +5,14 @@ const util = require('util');
 const errorHandling = require('../errorHandling');
 const getAboutMeSummarized = require('../../ai/actions/summarizer');
 
-async function aboutMe(chatId, text) {
+async function aboutMe(chatId, text, modify = false) {
 	if (text) {
 		try {
-			await User.findOneAndUpdate({ chatId }, { aboutMe: text });
+			const user = await User.findOne({ chatId });
+			const message = modify ? `${user.aboutMe} ${text}` : text;
+			await User.updateOne({ chatId }, { aboutMe: message });
 
-			const summary = await getAboutMeSummarized(chatId, text);
+			const summary = await getAboutMeSummarized(chatId, message);
 
 			if (summary.error) {
 				await sendMarkdownMessage(chatId, summary.message);
@@ -33,10 +35,10 @@ async function aboutMe(chatId, text) {
 				const score = summary.score;
 				const availableForJobSearch = score >= 7;
 
-				const profileStatusmessage = availableForJobSearch ? messages.completeProfileMessage : messages.incompleteProfileMessage;
-
-				await sendMarkdownMessage(chatId, profileStatusmessage);
-				if (!availableForJobSearch) await sendMarkdownMessage(chatId, messages.exampleProfile);
+				if (!availableForJobSearch) {
+					await sendMarkdownMessage(chatId, messages.incompleteProfileMessage);
+					await sendMarkdownMessage(chatId, messages.exampleProfile);
+				}
 
 				summary.score = score;
 				summary.availableForJobSearch = availableForJobSearch;

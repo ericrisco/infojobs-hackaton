@@ -20,13 +20,25 @@ module.exports = () => {
 		if (!user) {
 			await sendMarkdownMessage(chatId, messages.profileNotFound);
 			return;
-		} 
+		}
+
+		if(user.executing){
+			await sendMarkdownMessage(chatId, messages.executing);
+			return;
+		}
+
+		await User.findOneAndUpdate({ chatId }, { executing: true });
 
 		const nextAction = await getNextAction(chatId, msg.text);
+
+		console.log(user.chatId, nextAction.action, msg.text);
 
 		switch (nextAction.action) {
 			case 'aboutMe':
 				await aboutMe(chatId, msg.text);
+				break;
+			case 'aboutMeModify':
+				await aboutMe(chatId, msg.text, true);
 				break;
 			case 'profile':
 				await getProfile(chatId);
@@ -35,12 +47,12 @@ module.exports = () => {
 				var query = await createSearchQuery(chatId, msg.text);
 				if (query) {
 					var offersByQuery = await getOffersByQuery(query);
-					await printJobs(chatId, offersByQuery);
+					await printJobs(chatId, offersByQuery, false);
 				} else {
 					await sendMarkdownMessage(chatId, messages.searchQueryError);
 				}
 				break;
-			case 'jobs_profile':
+			case 'jobsProfile':
 				var offersByUser = await getLastOffersByUser(user);
 				await printJobs(chatId, offersByUser);
 				break;
@@ -60,6 +72,8 @@ module.exports = () => {
 				await sendMarkdownMessage(chatId, nextAction.message ?? messages.aiError);
 				break;
 		}
+		
+		await User.findOneAndUpdate({ chatId }, { executing: false });
 
 		return;
 	});

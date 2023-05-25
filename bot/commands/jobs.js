@@ -17,7 +17,7 @@ async function printJobs(chatId, offers, cron = false) {
 			await sendMarkdownMessage(chatId, messages.noJobsFound);
 		} else {
 			const user = await User.findOne({ chatId });
-			if(!cron) {
+			if (!cron) {
 				await sendMarkdownMessage(chatId, util.format(messages.jobsFound, totalResults, currentResults));
 				await sendMarkdownMessage(chatId, messages.analaizingJobs);
 			}

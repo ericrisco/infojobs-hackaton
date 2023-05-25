@@ -53,6 +53,9 @@ const INITIAL_MESSAGES = [
      Segun tu criterio si la descripción es correcta pon una valoracion de 0 a 10. Crea una recomendación de como deberia mejorar su descripción de un máximo de 100 palabras teniendo en cuenta el score
      relocationCities es un array de ciudades que el usuario ha mencionado en su descripción. En caso de que no haya mencionado ninguna ciudad, pon un array vacio.
 
+     Es posible que te encuentres que el mensaje primero diga una cosa, y luego se contradiga. Ten más en cuenta la última frase que diga el usuario.
+     Ejemplo: "Me llamo Julio, tengo 26 años, 3 años de experiencia programando en React y javascript pero ya no quiero programar, ahora quiero ser lider de proyectos."
+
      Este seria un ejemplo de resultado:
      
      {
@@ -69,6 +72,8 @@ const INITIAL_MESSAGES = [
         "score": 7,
         "recomendation": "Deberías mejorar tu descripción, es importante que me explicas a que te dedicas o a que te quieres dedicar."
      }
+     Es muy importante que solo me devuelvas un json. No necesito ningun otro tipo de texto explicando como lo has hecho o cual ha sido tu proceso de pensamiento. Solo el json.
+
      `
 	}
 ];
@@ -97,6 +102,7 @@ async function getAboutMeSummarized(chatId, text, attempts = OPEN_AI_RATE_LIMIT_
 			return { error: true, message: messages.aiError };
 		}
 	} catch (err) {
+		console.log(err.response);
 		if (err.response.status === 429 && attempts > 0) {
 			sendMarkdownMessage(chatId, messages.giveMeTime);
 			await new Promise((resolve) => setTimeout(resolve, OPEN_AI_DELAY_BETWEEN_RETRIES));
