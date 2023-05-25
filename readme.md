@@ -4,7 +4,7 @@ InfojobsGPT is an innovative Telegram chatbot that utilizes the OpenAI API and t
 
 ## 📝 Try the bot
 
-You can test the bot on Telegram at the following link: <a href="[http://example.com/](https://t.me/infojobsgpt_bot)" target="_blank">@infojobsgpt_bot</a>
+You can test the bot on Telegram at the following link: <a href="https://t.me/infojobsgpt_bot" target="_blank">@infojobsgpt_bot</a>
 
 ## 💻 Features
 
