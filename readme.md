@@ -1,45 +1,45 @@
 # 🧠🧑‍💼 InfojobsGPT
 
-InfojobsGPT es un chatbot innovador de Telegram que utiliza la API de OpenAI y la API de Infojobs para ayudar a las personas en su búsqueda de empleo. Utilizando el modelo GPT-3, permite la interacción en lenguaje natural, eliminando la necesidad de comandos predefinidos. Además de ayudar en la búsqueda de trabajo, InfojobsGPT tiene la capacidad de generar perfiles laborales para los usuarios, formular consultas a la API de Infojobs, evaluar ofertas de trabajo y, por supuesto, hacer chistes malos para alegrarte el día. Además, InfojobsGPT puede enviarte una oferta de trabajo que se ajuste a tu perfil todos los días.
+InfojobsGPT is an innovative Telegram chatbot that utilizes the OpenAI API and the Infojobs API to assist individuals in their job search. Using the GPT-3 model, it allows for natural language interaction, removing the need for predefined commands. Besides assisting in job searching, InfojobsGPT can generate job profiles for users, formulate queries to the Infojobs API, evaluate job offers, and, of course, tell bad jokes to brighten up your day. Additionally, InfojobsGPT can send you a job offer that matches your profile every day.
 
-## 📝 Prueba el bot
+## 📝 Try the bot
 
-Puedes probar el bot en Telegram en el siguiente enlace: [@infojobsgpt_bot](https://t.me/infojobsgpt_bot)
+You can test the bot on Telegram at the following link: [@infojobsgpt_bot](https://t.me/infojobsgpt_bot)
 
-## 💻 Características
+## 💻 Features
 
-1. **Interacción en lenguaje natural**: Interacción con el chatbot en lenguaje natural, sin necesidad de comandos predefinidos. El mismo funcionamiento que ChatGPT
-2. **Generación de perfiles laborales**: Generar tu perfiles laborales a través en lenguaje natural.
-3. **Modificación de perfil laboral**: Modifica perfiles laborals a través de lenguaje natural.
-4. **Buscador de trabajo por perfil**: Mediante el perfil laboral, formula consultas a la API de Infojobs para obtener ofertas de trabajo
-5. **Buscador de trabajo por prompt**: Mediante un prompt, formula consultas a la API de Infojobs para obtener ofertas de trabajo
-6. **Evaluación de ofertas de trabajo**: Compara una oferta de trabajo con tu perfil y te da su opinión.
-7. **Generador de chistes malos**: Genera chistes malos relacionados con la IA, la programación y la busqueda de trabajo.
-8. **Ofertas de trabajo diarias**: Envia una oferta de trabajo al dia a tu Telegram basandose en tu perfil laboral.
+1. **Natural Language Interaction**: Interact with the chatbot in natural language, without the need for predefined commands. Works the same as ChatGPT.
+2. **Job Profile Generation**: Generate your job profiles through natural language.
+3. **Job Profile Modification**: Modify job profiles through natural language.
+4. **Job Search by Profile**: Use your job profile to formulate queries to the Infojobs API and get job offers.
+5. **Job Search by Prompt**: Use a prompt to formulate queries to the Infojobs API and get job offers.
+6. **Job Offer Evaluation**: Compare a job offer with your profile and get feedback.
+7. **Bad Joke Generator**: Generate bad jokes related to AI, programming, and job searching.
+8. **Daily Job Offers**: Sends a job offer to your Telegram based on your job profile each day.
 
-## 💻 Tecnologías
+## 💻 Technologies
 
-- Node.js[https://nodejs.org/es/]
-- OpenAI API[https://platform.openai.com/]
-- Infojobs API[https://developer.infojobs.net/]
-- Telegram API[https://core.telegram.org/]
-- MongoDB[https://www.mongodb.com/]
+- [Node.js](https://nodejs.org/)
+- [OpenAI API](https://platform.openai.com/)
+- [Infojobs API](https://developer.infojobs.net/)
+- [Telegram API](https://core.telegram.org/)
+- [MongoDB](https://www.mongodb.com/)
 
-## 📝 Instalación
+## 📝 Installation
 
-1. Clona el repositorio
+1. Clone the repository
 
    ```sh
    git clone
    ```
 
-2. Instala los paquetes de NPM
+2. Install NPM packages
 
    ```sh
     npm install
     ```
 
-3. Crea un archivo .env con las siguientes variables de entorno:
+3. Run the server
 
    ```sh
     PORT=5000
@@ -53,6 +53,12 @@ Puedes probar el bot en Telegram en el siguiente enlace: [@infojobsgpt_bot](http
     OPEN_AI_RATE_LIMIT_RETRIES=5
     OPEN_AI_DELAY_BETWEEN_RETRIES=20000
    ```
+
+   You need a Telegram bot token, an Infojobs API key, a MongoDB URI, a MongoDB username, a MongoDB password, an OpenAI API token.
+   - You can get a Telegram bot token by talking to the [BotFather](https://t.me/botfather).
+   - You can get an Infojobs API key by talking to the [Infojobs API team](https://developer.infojobs.net/).
+   - You can get an OpenAI API token by signing up for the [OpenAI API](https://beta.openai.com/).
+   - You can get a MongoDB URI, a MongoDB username, and a MongoDB password by signing up for [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
 4. Ejecuta el servidor
 
