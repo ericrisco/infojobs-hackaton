@@ -27,13 +27,13 @@ async function aboutMe(chatId, text, modify = false) {
 					summary.keywords || 'N/A',
 					summary.willingToRelocate ? 'Sí' : 'No',
 					summary.relocationCities ? summary.relocationCities.join(', ') : 'N/A',
-					summary.recomendation
+					summary.recomendation || 'N/A'
 				);
 
 				await sendMarkdownMessage(chatId, summaryMessage);
 
 				const score = summary.score;
-				const availableForJobSearch = score >= 7;
+				const availableForJobSearch = score >= 8;
 
 				if (!availableForJobSearch) {
 					await sendMarkdownMessage(chatId, messages.incompleteProfileMessage);
