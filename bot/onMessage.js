@@ -35,7 +35,7 @@ module.exports = () => {
 
 		switch (nextAction.action) {
 			case 'aboutMe':
-				await aboutMe(chatId, msg.text);
+				await aboutMe(chatId, msg.text, user.aboutMe ? true : false);
 				break;
 			case 'aboutMeModify':
 				await aboutMe(chatId, msg.text, true);
