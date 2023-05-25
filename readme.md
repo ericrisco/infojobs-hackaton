@@ -15,11 +15,11 @@ InfojobsGPT is an innovative Telegram chatbot that utilizes the OpenAI API and t
 
 ## 💻 Technologies
 
-    - [Node.js](https://nodejs.org/)
-    - [OpenAI API](https://platform.openai.com/)
-    - [Infojobs API](https://developer.infojobs.net/)
-    - [Telegram API](https://core.telegram.org/)
-    - [MongoDB](https://www.mongodb.com/)
+- [Node.js](https://nodejs.org/)
+- [OpenAI API](https://platform.openai.com/)
+- [Infojobs API](https://developer.infojobs.net/)
+- [Telegram API](https://core.telegram.org/)
+- [MongoDB](https://www.mongodb.com/)
 
 ## 📝 Try the bot
 
