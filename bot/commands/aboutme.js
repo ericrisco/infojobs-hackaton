@@ -37,7 +37,7 @@ async function aboutMe(chatId, text, modify = false) {
 
 				if (!availableForJobSearch) {
 					await sendMarkdownMessage(chatId, messages.incompleteProfileMessage);
-					await sendMarkdownMessage(chatId, messages.exampleProfile);
+					await sendMarkdownMessage(chatId, messages.exampleModify);
 				}
 
 				summary.score = score;

@@ -36,7 +36,9 @@ async function getProfile(chatId) {
 			const profileStatusmessage = availableForJobSearch ? messages.completeProfileMessage : messages.incompleteProfileMessage;
 
 			await sendMarkdownMessage(chatId, profileStatusmessage);
-			if (!availableForJobSearch) await sendMarkdownMessage(chatId, messages.exampleProfile);
+			if (!availableForJobSearch){
+				await sendMarkdownMessage(chatId, messages.exampleModify);
+			} 
 		}
 	} catch (err) {
 		errorHandling(chatId, err);
