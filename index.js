@@ -27,10 +27,8 @@ app.get('/infojobs/ping', (req, res) => {
 });
 
 app.get('/infojobs/callback', async (req, res) => {
-    const {params} = new URL(req.url)
-    const code = params.get("code");
-	const chatId = params.get("chatId");
-	res.json({ code, chatId });
+	console.log(req.url);
+	res.json({ url: req.url });
 });
 
 app.listen(port, async () => {
