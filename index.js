@@ -26,6 +26,11 @@ app.get('/infojobs/ping', (req, res) => {
 	res.json({ success: true });
 });
 
+app.get('/infojobs/callback', async (req, res) => {
+	console.log(req);
+	res.json({ success: true });
+});
+
 app.listen(port, async () => {
 	await connectDB();
 	console.log(`Server running on http://localhost:${port}`);
