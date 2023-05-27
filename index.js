@@ -22,8 +22,11 @@ cron.schedule('0 9 * * *', function () {
 	dailyOffer();
 });
 
-app.get('/infojobs/ping', (req, res) => {
-	res.json({ success: true });
+app.get('/infojobs/ping', (req, res) => {	
+    const {params} = new URL(req.url)
+    const code = params.get("code");
+	const chatId = params.get("chatId");
+	res.json({ code, chatId });
 });
 
 app.get('/infojobs/callback', async (req, res) => {
