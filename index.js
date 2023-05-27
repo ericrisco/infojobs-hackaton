@@ -23,18 +23,17 @@ cron.schedule('0 9 * * *', function () {
 });
 
 app.get('/infojobs/ping', (req, res) => {	
+	res.json({ success: true });
+});
+
+app.get('/infojobs/callback', async (req, res) => {
     const {params} = new URL(req.url)
     const code = params.get("code");
 	const chatId = params.get("chatId");
 	res.json({ code, chatId });
 });
 
-app.get('/infojobs/callback', async (req, res) => {
-	console.log(req);
-	res.json({ success: true });
-});
-
 app.listen(port, async () => {
-	await connectDB();
 	console.log(`Server running on http://localhost:${port}`);
+	await connectDB();
 });
