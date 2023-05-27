@@ -11,6 +11,8 @@ async function aboutMe(chatId, text, modify = false) {
 			const user = await User.findOne({ chatId });
 			const message = modify ? `${user.aboutMe} ${text}` : text;
 			await User.updateOne({ chatId }, { aboutMe: message });
+			
+			await sendMarkdownMessage(chatId, messages.giveMeTime);
 
 			const summary = await getAboutMeSummarized(chatId, message);
 
