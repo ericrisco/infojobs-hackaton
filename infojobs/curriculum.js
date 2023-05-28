@@ -50,7 +50,7 @@ async function getExperiences(token, curriculumId) {
     experiences = experiences.join(", ");
     let words = experiences.split(" ");
     let uniqueExperiences = Array.from(new Set(words));
-    uniqueExperiences = uniqueExperiences.join(", ");
+    uniqueExperiences = uniqueExperiences.join(", ").replaceAll(', ,', ',');;
 
 	return uniqueExperiences;
 };
@@ -72,7 +72,7 @@ async function getSkills(token, curriculumId) {
     let expertises = json.expertise.map((expertises) => {
         return expertises.skill;
     });
-    expertises = expertises.join(", ");
+    expertises = expertises.join(", ").replaceAll(', ,', ',');;
 
 	return expertises;
 };
