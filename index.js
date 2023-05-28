@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cron = require('node-cron');
+const url = require('url');
 
 const app = express();
 
@@ -12,6 +13,8 @@ const startCommand = require('./bot/commands/start');
 const onMessage = require('./bot/onMessage');
 const errorCommand = require('./bot/commands/error');
 const dailyOffer = require('./cron/cron');
+const { remoteProfile } = require('./bot/commands/profile');
+const aboutMe = require('./bot/commands/aboutme');
 
 startCommand();
 onMessage();
@@ -27,8 +30,22 @@ app.get('/infojobs/ping', (req, res) => {
 });
 
 app.get('/infojobs/callback', async (req, res) => {
-	console.log(req.url);
-	res.json({ url: req.url });
+	const queryObject = url.parse(req.url,true).query;
+	const code = queryObject.code;
+	const state = queryObject.state;
+	const profile = await remoteProfile(state, code);
+	await aboutMe(state, JSON.stringify(profile));
+	res.send(`
+		<html>
+			<head>
+				<script>
+					window.close();
+				</script>
+			</head>
+			<body>
+			</body>
+		</html>
+	`);
 });
 
 app.listen(port, async () => {

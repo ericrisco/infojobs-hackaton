@@ -1,4 +1,9 @@
-const INFOJOBS_API_KEY = process.env.INFOJOBS_API_KEY;
+const CLIENT_ID = process.env.INFOJOBS_CLIENT_ID;
+const CLIENT_SECRET = process.env.INFOJOBS_CLIENT_SECRET;
+const BASIC_TOKEN = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
+    "base64"
+);
+
 const OFFER_LIST_URL = 'https://api.infojobs.net/api/9/offer?';
 const OFFER_ID_URL = 'https://api.infojobs.net/api/7/offer/';
 
@@ -21,7 +26,7 @@ async function getLastOffersByUser(user, maxResults = 3) {
 	const res = await fetch(url, {
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: `Basic ${INFOJOBS_API_KEY}`
+			Authorization: `Basic ${BASIC_TOKEN}`
 		}
 	});
 
@@ -44,7 +49,7 @@ async function getOffersByQuery(query) {
 	const res = await fetch(url, {
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: `Basic ${INFOJOBS_API_KEY}`
+			Authorization: `Basic ${BASIC_TOKEN}`
 		}
 	});
 
@@ -57,7 +62,7 @@ async function getOfferById(offerId) {
 	const res = await fetch(url, {
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: `Basic ${INFOJOBS_API_KEY}`
+			Authorization: `Basic ${BASIC_TOKEN}`
 		}
 	});
 

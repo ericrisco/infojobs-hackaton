@@ -34,7 +34,7 @@ const INITIAL_MESSAGES = [
 
      experienceYears es un valor numerico que representa los años de experiencia que tiene el usuario. Si no lo menciona pon un valor null.
 
-     score es un valor numerico que representa la puntuación que le das a la descripción del usuario. Si no lo menciona pon un valor null.
+     score es un valor numerico que representa la puntuación que le das al json resultado del perfil del usuario. Si no lo menciona pon un valor null.
 
      remote es un valor booleano que representa si el usuario quiere trabajar en remoto. Si no lo menciona pon un valor null.
 

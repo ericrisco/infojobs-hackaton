@@ -9,7 +9,7 @@ const { printJobs } = require('./commands/jobs');
 const User = require('../db/models/user');
 const getHelp = require('../ai/actions/help');
 const getJoke = require('../ai/actions/joke');
-const { getProfile, deleteProfile } = require('./commands/profile');
+const { getProfile, deleteProfile, remoteProfile } = require('./commands/profile');
 
 module.exports = () => {
 	bot.on('message', async (msg) => {
@@ -34,6 +34,9 @@ module.exports = () => {
 		console.log(user.chatId, nextAction.action, msg.text);
 
 		switch (nextAction.action) {
+			case 'remoteProfile':
+				await remoteProfile(chatId);
+				break;
 			case 'aboutMe':
 				await aboutMe(chatId, msg.text, user.aboutMe ? true : false);
 				break;

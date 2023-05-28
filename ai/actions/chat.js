@@ -21,6 +21,12 @@ const INITIAL_MESSAGES = [
 		
 		El campo "action" puede tener los siguientes valores:
 
+		- remoteProfile: En este caso el usuario esta pidiendo que cojamos su perfil de la pagina de infojobs y lo guardemos en nuestra base de datos.
+			Ejemplos remoteProfile:
+				"Quiero que cojais mi perfil de infojobs y lo guardeis en vuestra base de datos"
+				"Coje mi perfil de infojobs"
+				"Tengo cuenta en infojobs"
+
 		- aboutMe: Para esta categoría, el usuario está proporcionando información sobre sí mismo, incluyendo su experiencia laboral, habilidades y ubicación actual o preferida. Es importante que el modelo reconozca la introducción de datos personales y profesionales para procesar y almacenar adecuadamente.
 			Ejemplos aboutMe:
 				"Soy un diseñador gráfico con 7 años de experiencia trabajando con Adobe Creative Suite. Actualmente, estoy basado en Barcelona y siempre he soñado con trabajar en una agencia de diseño de vanguardia en Madrid."

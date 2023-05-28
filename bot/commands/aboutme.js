@@ -35,12 +35,12 @@ async function aboutMe(chatId, text, modify = false) {
 				await sendMarkdownMessage(chatId, summaryMessage);
 
 				const score = summary.score;
-				const availableForJobSearch = score >= 8;
+				const availableForJobSearch = score >= 6;
 
 				if (!availableForJobSearch) {
 					await sendMarkdownMessage(chatId, messages.incompleteProfileMessage);
-					await sendMarkdownMessage(chatId, messages.exampleModify);
 				}
+				await sendMarkdownMessage(chatId, messages.exampleModify);
 
 				summary.score = score;
 				summary.availableForJobSearch = availableForJobSearch;
