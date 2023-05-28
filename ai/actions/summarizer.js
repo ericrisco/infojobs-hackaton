@@ -99,7 +99,7 @@ async function getAboutMeSummarized(chatId, text, attempts = OPEN_AI_RATE_LIMIT_
 			json = JSON.parse(data);
 			return json;
 		} catch (err) {
-			return { error: true, message: messages.aiError };
+			return { error: true, message: messages.promptError };
 		}
 	} catch (err) {
 		console.log(err.response);
