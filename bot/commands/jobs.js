@@ -113,7 +113,7 @@ async function getJobsFromProfile(chatId) {
 				await sendMarkdownMessage(chatId, formattedJobOfferSummary);
 			}
 
-			await sendMarkdownMessage(chatId, messages.remember);
+			await sendMarkdownMessage(chatId, messages.helpSimple);
 		} else {
 			await sendMarkdownMessage(chatId, messages.incompleteProfileMessage);
 		}
