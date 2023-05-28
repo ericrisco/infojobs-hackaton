@@ -26,6 +26,14 @@ const INITIAL_MESSAGES = [
 				"Quiero que cojais mi perfil de infojobs y lo guardeis en vuestra base de datos"
 				"Coje mi perfil de infojobs"
 				"Tengo cuenta en infojobs"
+		
+		- githubProfile: En este caso el usuario esta pidiendo que cojamos su perfil de github. Basicamente, si el usuario nombra github, seguramente esta pidiendo esto. en [nombre de usuario] el usuario pondra su nombre de usuario de github, por ejemplo "ericrisco".
+			Ejemplos githubProfile:
+				"Quiero que cojais mi perfil de github, mi usuario es [nombre de usuario]"
+				"Coje mi perfil de github, mi usuario es [nombre de usuario]"
+				"Tengo cuenta en github"
+				"Mi usuario de github es [nombre de usuario]"
+				"mi usuario de github es ericrisco"
 
 		- aboutMe: Para esta categoría, el usuario está proporcionando información sobre sí mismo, incluyendo su experiencia laboral, habilidades y ubicación actual o preferida. Es importante que el modelo reconozca la introducción de datos personales y profesionales para procesar y almacenar adecuadamente.
 			Ejemplos aboutMe:
@@ -108,7 +116,7 @@ async function getNextAction(chatId, message, attempts = OPEN_AI_RATE_LIMIT_RETR
 		try {
 			return JSON.parse(data);
 		} catch (err) {
-			return { action: 'other', message: messages.aiError };
+			return { action: 'other', message: messages.promptError };
 		}
 	} catch (err) {
 		if (err.response.status === 429 && attempts > 0) {

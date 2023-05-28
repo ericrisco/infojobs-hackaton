@@ -10,6 +10,7 @@ const User = require('../db/models/user');
 const getHelp = require('../ai/actions/help');
 const getJoke = require('../ai/actions/joke');
 const { getProfile, deleteProfile, remoteProfile } = require('./commands/profile');
+const { extractTechnologies } = require('./commands/github');
 
 module.exports = () => {
 	bot.on('message', async (msg) => {
@@ -36,6 +37,9 @@ module.exports = () => {
 		switch (nextAction.action) {
 			case 'remoteProfile':
 				await remoteProfile(chatId);
+				break;
+			case 'githubProfile':
+				await extractTechnologies(chatId, msg.text);
 				break;
 			case 'aboutMe':
 				await aboutMe(chatId, msg.text, user.aboutMe ? true : false);
