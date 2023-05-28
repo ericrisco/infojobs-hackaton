@@ -38,7 +38,6 @@ async function getJoke(chatId, attempts = OPEN_AI_RATE_LIMIT_RETRIES) {
 		});
 
 		const data = completion.data.choices[0].message?.content ?? '';
-		console.log(data);
 		return data;
 	} catch (err) {
 		if (err.response.status === 429 && attempts > 0) {
