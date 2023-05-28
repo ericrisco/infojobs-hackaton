@@ -8,11 +8,12 @@ InfojobsGPT is an innovative Telegram chatbot that utilizes the OpenAI API and t
 2. **Job Profile extract from InfoJobs**: Extract your job profile from Infojobs through natural language.
 3. **Job Profile Generation**: Generate your job profiles through natural language.
 4. **Job Profile Modification**: Modify job profiles through natural language.
-5. **Job Search by Profile**: Use your job profile to formulate queries to the Infojobs API and get job offers.
-6. **Job Search by Prompt**: Use a prompt to formulate queries to the Infojobs API and get job offers.
-7. **Job Offer Evaluation**: Compare a job offer with your profile and get feedback.
-8. **Bad Joke Generator**: Generate bad jokes related to AI, programming, and job searching.
-9. **Daily Job Offers**: Sends a job offer to your Telegram based on your job profile each day.
+5. **Technology Extraction from GitHub**: Extract the technologies used in your GitHub repositories through natural language.
+6. **Job Search by Profile**: Use your job profile to formulate queries to the Infojobs API and get job offers.
+7. **Job Search by Prompt**: Use a prompt to formulate queries to the Infojobs API and get job offers.
+8. **Job Offer Evaluation**: Compare a job offer with your profile and get feedback.
+9. **Bad Joke Generator**: Generate bad jokes related to AI, programming, and job searching.
+10. **Daily Job Offers**: Sends a job offer to your Telegram based on your job profile each day.
 
 ## 💻 Technologies
 
@@ -55,6 +56,7 @@ You can test the bot on Telegram at the following link: [@infojobsgpt_bot](https
     INFOJOBS_CLIENT_ID=xxx
     INFOJOBS_CLIENT_SECRET=yyy
     INFOJOBS_REDIRECT_URI=xxxx/infojobs/callback
+    GITHUB_API_TOKEN=xxx
     ```
 
     You need a Telegram bot token, an Infojobs API key, a MongoDB URI, a MongoDB username, a MongoDB password, an OpenAI API token.
@@ -63,6 +65,7 @@ You can test the bot on Telegram at the following link: [@infojobsgpt_bot](https
     - You can get an Infojobs Client ID and Client Secret [Infojobs API team](https://developer.infojobs.net/).
     - You can get an OpenAI API token by signing up for the [OpenAI API](https://beta.openai.com/).
     - You can get a MongoDB URI, a MongoDB username, and a MongoDB password by signing up for [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+    - You can get a GitHub API token by following the instructions [Github](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token).
 
 4. Run the dev server
 
